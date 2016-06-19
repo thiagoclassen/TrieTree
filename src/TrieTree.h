@@ -11,6 +11,7 @@
 #include <cctype>
 #include <iostream>
 #include <list>
+#include <iomanip>
 #ifndef TRIETREE_H_
 #define TRIETREE_H_
 
@@ -28,5 +29,6 @@ TrieNode *getNode(void);
 void insert(TrieNode *root, const char *key, int pos);
 bool search(TrieNode *root, const char *key);
 int getPos(char l);
+void traverse(TrieNode* node, std::string key);
 
 #endif /* TRIETREE_H_ */

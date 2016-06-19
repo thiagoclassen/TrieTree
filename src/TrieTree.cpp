@@ -36,7 +36,7 @@ void insert(TrieNode *root, const char *key, int pos) {
 	aux->pos->push_back(pos);
 }
 
-bool search(struct TrieNode *root, const char *key) {
+bool search(TrieNode *root, const char *key) {
 	int i;
 	int idx;
 	bool result = false;
@@ -51,20 +51,39 @@ bool search(struct TrieNode *root, const char *key) {
 		aux = aux->children[idx];
 	}
 
-	if(aux != NULL && aux->folha){
-		std::cout << "Palavra '"<< key << "' encontrada com " << aux->nr <<" ocorrencias"<< std::endl;
+	if (aux != NULL && aux->folha) {
+		std::cout << "Palavra '" << key << "' encontrada com " << aux->nr
+				<< " ocorrencias" << std::endl;
 		std::cout << "Posições: ";
-		for(std::list<int>::iterator it=aux->pos->begin(); it != aux->pos->end(); ++it){
+		for (std::list<int>::iterator it = aux->pos->begin();
+				it != aux->pos->end(); ++it) {
 			std::cout << " " << *it;
 		}
 		result = true;
-	}else{
-		std::cout << "Palavra não encontrada." <<std::endl;
 	}
 
 	return result;
 }
 
-int getPos(char l){
-	return (int)tolower(l) - (int)'a';
+int getPos(char l) {
+	return (int) tolower(l) - (int) 'a';
+}
+
+void traverse(TrieNode* node, std::string key) {
+	if (node->folha) {
+		std::cout << key << " | encontrada: " << node->nr << " vezes, Posições: ";
+		for (std::list<int>::iterator it = node->pos->begin(); it != node->pos->end(); ++it) {
+			std::cout << " " << *it;
+		}
+		std::cout << std::endl;
+	}
+
+	for (int i = 0; i < 26; i++) {
+		TrieNode* child = node->children[i];
+		if (child) {
+			key += ((char) (97 + i));
+			traverse(child, key);
+			key.erase(key.size() - 1);
+		}
+	}
 }
