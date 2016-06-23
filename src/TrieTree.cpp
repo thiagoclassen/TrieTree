@@ -66,16 +66,20 @@ bool search(TrieNode *root, const char *key) {
 }
 
 int getPos(char l) {
-	return (int) tolower(l) - (int) 'a';
+	int teste = (int) tolower(l) - (int) 'a';
+	return teste;
 }
 
 void traverse(TrieNode* node, std::string key) {
+	static int teste = 0;
 	if (node->folha) {
+
 		std::cout << key << " | encontrada: " << node->nr << " vezes, Posições: ";
 		for (std::list<int>::iterator it = node->pos->begin(); it != node->pos->end(); ++it) {
 			std::cout << " " << *it;
 		}
 		std::cout << std::endl;
+		teste++;
 	}
 
 	for (int i = 0; i < 26; i++) {
@@ -86,4 +90,6 @@ void traverse(TrieNode* node, std::string key) {
 			key.erase(key.size() - 1);
 		}
 	}
+
+//	std::cout <<"palavras total :=> " << teste<<std::endl;;
 }

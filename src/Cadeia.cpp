@@ -13,7 +13,7 @@ TrieNode *root = getNode();
 int main() {
 
 	ifstream file;
-	file.open("words.txt");
+	file.open("historia.txt");
 	string palavra;
 	palavra.clear();
 	bool punct = false;
@@ -27,7 +27,8 @@ int main() {
 				punct = true;
 			}
 		}
-		insert(root, palavra.c_str(), cont);
+
+			insert(root, palavra.c_str(), cont);
 
 		if (punct)
 			cont++;
